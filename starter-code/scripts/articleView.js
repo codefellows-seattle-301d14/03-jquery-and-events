@@ -37,7 +37,7 @@ articleView.handleAuthorFilter = function() {
 };
 
 articleView.handleCategoryFilter = function() {
-  /* TODO: DONE! Just like we do for #author-filter above, we should also handle
+  /* TODO: DONE Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
   $('#category-filter').on('change', function(){
@@ -55,6 +55,8 @@ articleView.handleMainNav = function() {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
+    $('.tab-content').hide();
+    $('.tab-content').fadeIn($(this));
   });
   $('.main-nav .tab:first').click();
 };
@@ -70,6 +72,17 @@ articleView.setTeasers = function() {
 
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
+
+  $('.read-on').on('click', function() {
+    event.preventDefault();
+    $('article-body').show();
+    $(this).hide();
+  });
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
