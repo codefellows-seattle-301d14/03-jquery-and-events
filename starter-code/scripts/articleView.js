@@ -25,9 +25,22 @@ articleView.handleAuthorFilter = function() {
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+      $('article').hide();
+      var currentAuthor = $(this).val();
+      // console.log($(this).dataset.author);
+      $('article').not('.template').each(function() {
+        // console.log(this.dataset.author);
+        if ( currentAuthor === this.dataset.author){
+          $(this).show();
+        }
+      });
+      // console.log($('article[data-author=' + $(this).val() + ']'));
+      // console.log($('article[data-author='$(this).val()']'));
+
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
+      $('article').not('.template').show();
     }
     $('#category-filter').val('');
   });
@@ -37,7 +50,29 @@ articleView.handleCategoryFilter = function() {
   /* TODO: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
+  $('#category-filter').on('change', function() {
+    if ($(this).val()) {
+      $('article').hide();
+      var currentAuthor = $(this).val();
+      $('article').not('.template').each(function() {
+        if ( currentAuthor === this.dataset.category){
+          $(this).show();
+        }
+      });
+    } else {
+    /* Otherwise, we should:
+        1. Show all the articles except the template */
+      $('article').not('.template').show();
+    }
+    $('#author-filter').val('');
+  });
+
+
+
 };
+
+
+
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
@@ -64,3 +99,6 @@ articleView.setTeasers = function() {
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
