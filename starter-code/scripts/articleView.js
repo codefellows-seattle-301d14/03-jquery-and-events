@@ -19,12 +19,19 @@ articleView.populateFilters = function() {
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
-      /* TODO: If the slect box changes to an option that has a value, we should:
+      /* TODO: If the select box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
-            that was aselected. Hint: use an attribute selector to find
+            that was a selected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+        // for (var i = 0; i < allArticles.length; i++) {
+        // if (!allArticles[i].author===$(this).val()){
+        //     allArticles.splice(i, 1);
+        //   } allArticles.forEach(function(a){
+        //     $('#articles').fadeIn(a.toHtml());
+        //   });
+          console.log($(this).val());
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
@@ -64,3 +71,8 @@ articleView.setTeasers = function() {
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
