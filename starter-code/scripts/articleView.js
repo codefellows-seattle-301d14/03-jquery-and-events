@@ -25,9 +25,12 @@ articleView.handleAuthorFilter = function() {
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+      $('#articles').hide('change');
+      $('#articles').fade('author');
     } else {
-    /* Otherwise, we should:
-        1. Show all the articles except the template */
+      /* Otherwise, we should:
+          1. Show all the articles except the template */
+      $('article').not('.template');
     }
     $('#category-filter').val('');
   });
@@ -39,7 +42,7 @@ articleView.handleCategoryFilter = function() {
   #author-filter while you're at it! */
 };
 
-articleView.handleMainNav = function () {
+articleView.handleMainNav = function() {
   $('.main-nav').on('click', '.tab', function() {
     /* TODO:
       1. Hide all of the .tab-content sections
