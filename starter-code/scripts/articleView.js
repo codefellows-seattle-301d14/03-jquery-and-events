@@ -19,6 +19,9 @@ articleView.populateFilters = function() {
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
+      $('article').hide();
+      console.log($(this).val());
+      $('article[data-attribute=\"' + $(this).val() + '\"]').fadeIn('fast');
       /* TODO: If the slect box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
@@ -64,3 +67,6 @@ articleView.setTeasers = function() {
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+
+articleView.populateFilters();
+articleView.handleAuthorFilter();
