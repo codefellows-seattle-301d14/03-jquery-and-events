@@ -6,7 +6,6 @@ articleView.populateFilters = function() {
   $('article').not('.template').each(function() {
     var authorName, category, optionTag;
     authorName = $(this).find('address a').text();
-    console.log('hi');
     optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
     $('#author-filter').append(optionTag);
     category = $(this).attr('data-category');
@@ -19,14 +18,20 @@ articleView.populateFilters = function() {
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
+    var authorName = $(this).val();
+    console.log(authorName);
     if ($(this).val()) {
-      /* TODO: If the slect box changes to an option that has a value, we should:
+      console.log('TRUE');
+      $('article[data-author!="' + authorName + '"]').fadeOut();
+      /* TODO: DONE!!! If the slect box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
     } else {
+      console.log('FALSE');
+      $('article').not('.template').show();
     /* Otherwise, we should:
         1. Show all the articles except the template */
     }
@@ -35,13 +40,26 @@ articleView.handleAuthorFilter = function() {
 };
 
 articleView.handleCategoryFilter = function() {
-  /* TODO: Just like we do for #author-filter above, we should also handle
+  /* TODO: DONE!!!! Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
+  $('#category-filter').on('change', function() {
+    var dataCategory = $(this).val();
+    console.log(dataCategory);
+    if ($(this).val()) {
+      console.log('TRUE');
+      $('article[data-category!="' + dataCategory + '"]').fadeOut();
+    } else {
+      console.log('FALSE');
+      $('article').not('.template').show();
+    }
+    $('#author-filter').val('');
+  });
 };
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
+    // console.log('CLICKED TAB' + $('article');
     /* TODO:
       1. Hide all of the .tab-content sections
       2. Fade in the single .tab-content section that is
