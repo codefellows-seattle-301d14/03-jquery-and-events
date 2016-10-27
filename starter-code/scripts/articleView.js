@@ -42,8 +42,8 @@ articleView.handleCategoryFilter = function() {
   #author-filter while you're at it! */
   $('#category-filter').on('change', function(){
     if ($(this).val()) {
-      $('#articles').hide('change');
-      $('#articles').fadeIn('category');
+      $('article').hide();
+      $('article[data-category="' + $(this).val() + '"]').fadeIn();
     }
   });
 };
@@ -55,8 +55,8 @@ articleView.handleMainNav = function() {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
-    $('.tab-content').hide();
-    $('.tab-content').fadeIn($(this));
+    $('section.tab-content').hide();
+    $('.tab-content').fadeIn();
   });
   $('.main-nav .tab:first').click();
 };
@@ -83,6 +83,6 @@ articleView.setTeasers = function() {
 // TODO: Invoke all of the above functions (I mean, methods!):
 articleView.populateFilters();
 articleView.handleAuthorFilter();
-// articleView.handleCategoryFilter();
-// articleView.handleMainNav();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
 // articleView.setTeasers();
