@@ -66,7 +66,6 @@ articleView.handleCategoryFilter = function() {
 };
 
 articleView.handleMainNav = function () {
-  $('section#about').hide();
   $('.main-nav').on('click', '.tab', function(e) {
     /* TODO:
       1. Hide all of the .tab-content sections
@@ -80,7 +79,7 @@ articleView.handleMainNav = function () {
     $('section'+selection).fadeIn();
 
   });
-  //$('.main-nav .tab:first').click();
+  $('.main-nav .tab:first').click();
 };
 
 articleView.setTeasers = function() {
