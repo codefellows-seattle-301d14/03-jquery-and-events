@@ -18,29 +18,42 @@ articleView.populateFilters = function() {
 };
 
 articleView.handleAuthorFilter = function() {
-  $('#author-filter').on('change', function() {
-    if ($(this).val()) {
-      /* TODO: If the slect box changes to an option that has a value, we should:
-          1. Hide all of the articles
-          2. Fade in only the articles that match based on on the author
+    $('#author-filter').on('change', function() {
+        if ($(this).val()) {
+            /* TODO: If the slect box changes to an option that has a value, we should:
+            1. Hide all of the articles
+            2. Fade in only the articles that match based on on the author
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
-        */
-        $newArticle.hide();
-        $newArticle.attr('data-category', this.authorName).fadeIn();
-    } else {
-    /* Otherwise, we should:
-        1. Show all the articles except the template */
-        $newArticle.not('.template');
-    }
-    $('#category-filter').val('');
-  });
+            */
+           $('article').hide();
+           var $authorConnector = ($(this).val());
+           console.log($authorConnector);
+            $('article[data-author="'+$authorConnector+'"]').fadeIn();
+        } else {
+            /* Otherwise, we should:
+            1. Show all the articles except the template */
+            $('article').not('.template').show();
+        }
+        $('#category-filter').val('');
+    });
 };
 
 articleView.handleCategoryFilter = function() {
   /* TODO: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
+  $('#category-filter').on('change', function(){
+     if ($(this).val()) {
+         $('article').hide();
+         var $categoryConnector = ($(this).val());
+         $('article[data-category="'+$categoryConnector+'"]').fadeIn();
+     }
+     else {
+        $('article').not('.template').show();
+     }
+    $('#author-filter').val('');
+  })
 };
 
 articleView.handleMainNav = function () {
@@ -62,6 +75,7 @@ articleView.setTeasers = function() {
   // Truncate logic to show only first two elements within the article body.
   $('.article-body *:nth-of-type(n+2)').hide();
   /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
+
     When a .read-on link is clicked, we can:
     1. Prevent the default action of a link.
     2. Reveal everything in that particular article now.
@@ -69,7 +83,21 @@ articleView.setTeasers = function() {
 
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
+
+
+$('#articles').on('click', 'a.read-on', function(event){
+
+    event.preventDefault();
+    console.log($(this));
+    $('.article-body').show();
+    $(this).parent().find('*').fadeIn();
+    $(this).hide();
+    // $(this).show();
+    // $(this.read-on).hide();
+});
 };
+
+
 
 // TODO: Invoke all of the above functions (I mean, methods!):
 
