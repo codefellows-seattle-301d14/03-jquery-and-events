@@ -22,7 +22,8 @@ articleView.handleAuthorFilter = function() {
     console.log(authorName);
     if ($(this).val()) {
       console.log('TRUE');
-      $('article[data-author!="' + authorName + '"]').fadeOut();
+      $('article').hide();
+      $('article[data-author="' + authorName + '"]').fadeIn();
       /* TODO: DONE!!! If the slect box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
@@ -48,7 +49,8 @@ articleView.handleCategoryFilter = function() {
     console.log(dataCategory);
     if ($(this).val()) {
       console.log('TRUE');
-      $('article[data-category!="' + dataCategory + '"]').fadeOut();
+      $('article').hide();
+      $('article[data-category="' + dataCategory + '"]').fadeIn();
     } else {
       console.log('FALSE');
       $('article').not('.template').show();
@@ -59,8 +61,11 @@ articleView.handleCategoryFilter = function() {
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
-    // console.log('CLICKED TAB' + $('article');
-    /* TODO:
+    var tab = $(this).attr('data-content');
+    console.log(tab);
+    $('.tab-content').hide();
+    $('#' + tab).fadeIn();
+    /* TODO: DONE!!!!
       1. Hide all of the .tab-content sections
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
@@ -72,6 +77,11 @@ articleView.handleMainNav = function () {
 articleView.setTeasers = function() {
   // Truncate logic to show only first two elements within the article body.
   $('.article-body *:nth-of-type(n+2)').hide();
+  $('#articles').on('click', '.read-on', function (event){
+    event.preventDefault();
+    $(this).prev().children('.article-body *:nth-of-type(n+2)').fadeIn();
+    $(this).attr('.read-on').hide();
+  });
   /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
     When a .read-on link is clicked, we can:
     1. Prevent the default action of a link.
@@ -85,5 +95,6 @@ articleView.setTeasers = function() {
 articleView.populateFilters();
 articleView.handleAuthorFilter();
 articleView.handleCategoryFilter();
+articleView.handleMainNav();
 articleView.setTeasers();
 /* TODO Done! Invoke all of the above functions (I mean, methods!):*/
