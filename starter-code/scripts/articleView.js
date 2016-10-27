@@ -80,9 +80,9 @@ articleView.setTeasers = function() {
   $('#articles').on('click', '.read-on', function (event){
     event.preventDefault();
     $(this).prev().children('.article-body *:nth-of-type(n+2)').fadeIn();
-    $(this).click('.read-on').hide(); // STILL NOT WORKING!!!!!!!!!!!!!
+    $(this).click('.read-on').hide();
   });
-  /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
+  /* TODO: DONE!!! Add a delegated event handler to reveal the remaining paragraphs.
     When a .read-on link is clicked, we can:
     1. Prevent the default action of a link.
     2. Reveal everything in that particular article now.
