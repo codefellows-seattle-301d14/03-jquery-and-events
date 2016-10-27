@@ -30,7 +30,7 @@ articleView.handleAuthorFilter = function() {
     } else {
       /* Otherwise, we should:
           1. Show all the articles except the template */
-      $('article').not('.template');
+      $('article').not('.template').show();
     }
     $('#category-filter').val('');
   });
@@ -44,6 +44,8 @@ articleView.handleCategoryFilter = function() {
     if ($(this).val()) {
       $('article').hide();
       $('article[data-category="' + $(this).val() + '"]').fadeIn();
+    } else {
+      $('article').not('.template').show();
     }
   });
 };
@@ -55,8 +57,10 @@ articleView.handleMainNav = function() {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
-    $('section.tab-content').hide();
-    $('.tab-content').fadeIn();
+    var tab = $(this).attr('data-content');
+    console.log(tab);
+    $('.tab-content').hide();
+    $('#' + tab).fadeIn();
   });
   $('.main-nav .tab:first').click();
 };
@@ -73,7 +77,7 @@ articleView.setTeasers = function() {
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
 
-  $('.read-on').on('click', function() {
+  $('.read-on').on('click', function(event) {
     event.preventDefault();
     $('article-body').show();
     $(this).hide();
@@ -85,4 +89,4 @@ articleView.populateFilters();
 articleView.handleAuthorFilter();
 articleView.handleCategoryFilter();
 articleView.handleMainNav();
-// articleView.setTeasers();
+articleView.setTeasers();
