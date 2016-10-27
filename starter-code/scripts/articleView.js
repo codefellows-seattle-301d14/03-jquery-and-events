@@ -1,7 +1,6 @@
 //  Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
 
-
 articleView.populateFilters = function() {
   $('article').not('.template').each(function() {
     var authorName, category, optionTag;
@@ -25,11 +24,17 @@ articleView.handleAuthorFilter = function() {
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+      $('#articles').hide();
+      console.log('hide ran');
+      // $("article['data-author', $(this).val()]').fadeIn();
+      $('article[data-author=' + '"' + $(this).val()+ '"' + ']');
+      console.log($(this).val(), 'data-author ran');
+
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
     }
-    $('#category-filter').val('');
+    // $('#category-filter').val('');
   });
 };
 
@@ -64,3 +69,5 @@ articleView.setTeasers = function() {
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+articleView.populateFilters();
+$('#author-filter').on('click',articleView.handleAuthorFilter);
