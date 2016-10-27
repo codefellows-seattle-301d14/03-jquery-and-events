@@ -20,7 +20,7 @@ articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
       console.log($(this).val());
-      /* TODO: If the select box changes to an option that has a value, we should:
+      /* TODO:DONE If the select box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
             that was aselected. Hint: use an attribute selector to find
@@ -28,7 +28,6 @@ articleView.handleAuthorFilter = function() {
         */
       $('article').hide();
       $($('article[data-author="' + $(this).val() + '"]')).fadeIn();
-      console.log($($('[author=author-filter]')));
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
@@ -43,6 +42,16 @@ articleView.handleCategoryFilter = function() {
   /* TODO: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
+  $('#category-filter').on('change', function() {
+    if ($(this).val()) {
+      $('article').hide();
+      $($('article[data-category="' + $(this).val() + '"]')).fadeIn();
+    } else {
+      $('article').show();
+      $('article.template').hide();
+    }
+    $('#author-filter').val('');
+  });
 };
 
 articleView.handleMainNav = function () {
