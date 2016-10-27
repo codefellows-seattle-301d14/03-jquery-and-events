@@ -25,8 +25,8 @@ articleView.handleAuthorFilter = function() {
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
-      $('#articles').hide('change');
-      $('#articles').fadeIn('authorName');
+      $('article').hide();
+      $('article[data-author="' + $(this).val() + '"]').fadeIn();
     } else {
       /* Otherwise, we should:
           1. Show all the articles except the template */
@@ -83,6 +83,6 @@ articleView.setTeasers = function() {
 // TODO: Invoke all of the above functions (I mean, methods!):
 articleView.populateFilters();
 articleView.handleAuthorFilter();
-articleView.handleCategoryFilter();
-articleView.handleMainNav();
-articleView.setTeasers();
+// articleView.handleCategoryFilter();
+// articleView.handleMainNav();
+// articleView.setTeasers();
