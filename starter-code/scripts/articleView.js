@@ -66,11 +66,12 @@ articleView.handleMainNav = function () {
         associated with the .tab element's data-content attribute.
     */
     // done
-    $('article').hide();
-    $('#about').hide();
-    $('#about').fadeIn('slow');
+    $('.tab-content').hide();
+    var mainNav = $(this).attr('data-content');
+    $('#' + mainNav).fadeIn('slow');
+
   });
-  // $('.main-nav .tab:first').click();
+  $('.main-nav .tab:first').click();
 };
 
 articleView.setTeasers = function() {
@@ -85,7 +86,7 @@ articleView.setTeasers = function() {
 
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
-  $('a').on('click',function(event){
+  $('.read-on').on('click', function(event){
     event.preventDefault();
     $(this).parent().find('*').show();
     $(this).hide();
