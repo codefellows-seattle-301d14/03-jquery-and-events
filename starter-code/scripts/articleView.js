@@ -56,12 +56,15 @@ articleView.handleCategoryFilter = function() {
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
-    /* TODO:
+    /* TODO:DONE
       1. Hide all of the .tab-content sections
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
-    $('li.tab').hide();
+    $('section.tab-content').hide();
+    console.log($(this).attr('data-content'));
+    var tabShow = $(this).attr('data-content');
+    $($('section[id="' + tabShow + '"]')).fadeIn();
   });
   $('.main-nav .tab:first').click();
 };
