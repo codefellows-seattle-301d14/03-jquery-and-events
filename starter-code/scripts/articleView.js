@@ -58,21 +58,30 @@ articleView.handleMainNav = function () {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
+    $('.tab-content').hide();
+    console.log($(this)[0].attributes[1].value);
+    $('main section[id=\"' + $(this)[0].attributes[1].value + '\"]').fadeIn('fast');
   });
-  $('.main-nav .tab:first').click();
 };
 
 articleView.setTeasers = function() {
-  // Truncate logic to show only first two elements within the article body.
+ // Truncate logic to show only first two elements within the article body.
   $('.article-body *:nth-of-type(n+2)').hide();
-  /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
-    When a .read-on link is clicked, we can:
-    1. Prevent the default action of a link.
-    2. Reveal everything in that particular article now.
-    3. Hide that read-on link!
+ /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
+   When a .read-on link is clicked, we can:
+   1. Prevent the default action of a link.
+   2. Reveal everything in that particular article now.
+   3. Hide that read-on link!
 
-    // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
-  */
+   STRETCH GOAl!: change the 'Read On' link to 'Show Less'
+ */
+  $('#articles').on('click', 'article>a', function (e) {
+    e.preventDefault();
+    console.log(e);
+    console.log($(this).parent().find('p'));
+    $(this).parent().find('p').fadeIn();
+    $(this).hide();
+  });
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
@@ -80,5 +89,5 @@ articleView.setTeasers = function() {
 articleView.populateFilters();
 articleView.handleAuthorFilter();
 articleView.handleCategoryFilter();
-//articleView.handleMainNav();
-//articleView.setTeasers();
+articleView.handleMainNav();
+articleView.setTeasers();
