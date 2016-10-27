@@ -80,7 +80,7 @@ articleView.setTeasers = function() {
   $('#articles').on('click', '.read-on', function (event){
     event.preventDefault();
     $(this).prev().children('.article-body *:nth-of-type(n+2)').fadeIn();
-    $(this).attr('.read-on').hide();
+    $(this).click('.read-on').hide(); // STILL NOT WORKING!!!!!!!!!!!!!
   });
   /* TODO: Add a delegated event handler to reveal the remaining paragraphs.
     When a .read-on link is clicked, we can:
