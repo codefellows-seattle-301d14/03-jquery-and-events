@@ -88,17 +88,23 @@ articleView.setTeasers = function() {
 
   // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
+  // DONE!
 
   $('#articles').on('click', 'a.read-on', function(event){
     event.preventDefault();
-    $('.article-body').show();
-    $(this).parent().find('*').fadeIn();
+    // $('.article-body').show(); <--- We don't need this part for the article to show.
     console.log($(this));
-    $(this).hide();
+    //if/else conditional statement after preventingDefault, to switch the text from read-on to show less after the article display logic.
+    if ( $(this).text() === 'Read on →') {
+      $(this).parent().find('*').fadeIn();
+      $(this).html('Show Less');
+    //else to set the teasers. Swtich the text to Read on.
+    } else {
+      $('.article-body *:nth-of-type(n+2)').hide();
+      $(this).html('Read on →');
+    }
   });
 };
-
-
 
 // TODO: Invoke all of the above functions (I mean, methods!):
 
