@@ -28,10 +28,11 @@ articleView.handleAuthorFilter = function() {
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+        // done
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
-
+    // done
       $('article').not('.template').show();
     }
     $('#category-filter').val('');
@@ -48,8 +49,9 @@ articleView.handleCategoryFilter = function() {
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
+      $('article').not('.template').show();
     }
-    $('#category-filter').val('');
+    $('#author-filter').val('');
   });
   /* TODO: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
@@ -63,8 +65,12 @@ articleView.handleMainNav = function () {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
+    // done
+    $('article').hide();
+    $('#about').hide();
+    $('#about').fadeIn('slow');
   });
-  $('.main-nav .tab:first').click();
+  // $('.main-nav .tab:first').click();
 };
 
 articleView.setTeasers = function() {
@@ -75,9 +81,15 @@ articleView.setTeasers = function() {
     1. Prevent the default action of a link.
     2. Reveal everything in that particular article now.
     3. Hide that read-on link!
+    Done
 
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
+  $('a').on('click',function(event){
+    event.preventDefault();
+    $(this).parent().find('*').show();
+    $(this).hide();
+  });
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
@@ -85,3 +97,5 @@ articleView.setTeasers = function() {
 articleView.populateFilters();
 articleView.handleAuthorFilter();
 articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
