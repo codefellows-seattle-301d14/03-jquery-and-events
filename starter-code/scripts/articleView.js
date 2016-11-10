@@ -19,21 +19,38 @@ articleView.populateFilters = function() {
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
+      $('article').hide();
+      $('article[data-attribute=\"' + $(this).val() + '\"]').fadeIn('fast');
       /* TODO: If the slect box changes to an option that has a value, we should:
           1. Hide all of the articles
           2. Fade in only the articles that match based on on the author
             that was aselected. Hint: use an attribute selector to find
             those articles that match the value, and then fade them in.
         */
+        // done
     } else {
     /* Otherwise, we should:
         1. Show all the articles except the template */
+    // done
+      $('article').not('.template').show();
     }
     $('#category-filter').val('');
   });
 };
 
 articleView.handleCategoryFilter = function() {
+  $('#category-filter').on('change', function() {
+    if ($(this).val()) {
+      $('article').hide();
+      $('article[data-category=\"' + $(this).val() + '\"]').fadeIn('fast');
+
+    } else {
+    /* Otherwise, we should:
+        1. Show all the articles except the template */
+      $('article').not('.template').show();
+    }
+    $('#author-filter').val('');
+  });
   /* TODO: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
@@ -46,6 +63,11 @@ articleView.handleMainNav = function () {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
+    // done
+    $('.tab-content').hide();
+    var mainNav = $(this).attr('data-content');
+    $('#' + mainNav).fadeIn('slow');
+
   });
   $('.main-nav .tab:first').click();
 };
@@ -58,9 +80,21 @@ articleView.setTeasers = function() {
     1. Prevent the default action of a link.
     2. Reveal everything in that particular article now.
     3. Hide that read-on link!
+    Done
 
     // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
   */
+  $('.read-on').on('click', function(event){
+    event.preventDefault();
+    $(this).parent().find('*').show();
+    $(this).hide();
+  });
 };
 
 // TODO: Invoke all of the above functions (I mean, methods!):
+
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
