@@ -20,7 +20,6 @@ articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
       $('article').hide();
-      console.log($(this).val());
       $('article[data-attribute=\"' + $(this).val() + '\"]').fadeIn('fast');
       /* TODO: If the slect box changes to an option that has a value, we should:
           1. Hide all of the articles
@@ -43,7 +42,6 @@ articleView.handleCategoryFilter = function() {
   $('#category-filter').on('change', function() {
     if ($(this).val()) {
       $('article').hide();
-      console.log($(this).val());
       $('article[data-category=\"' + $(this).val() + '\"]').fadeIn('fast');
 
     } else {
